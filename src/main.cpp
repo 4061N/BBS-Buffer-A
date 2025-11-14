@@ -89,13 +89,13 @@ float GET_duty_by_HALL_ADC(float HALL_ADC_value)
     const float HALL_ADC_min = 2.4;
     const float HALL_ADC_max = 0.9;
     float duty=(HALL_ADC_value - HALL_ADC_min) / (HALL_ADC_max - HALL_ADC_min);
-    if(duty<0)
+    if(duty<0.1)
     {
-        duty=0;
+        duty=0.1;
     }
-    else if(duty>1)
+    else if(duty>0.9)
     {
-        duty=1;
+        duty=0.9;
     }
     return duty;
 }
@@ -130,6 +130,7 @@ void set_RGB_by_duty(float duty)
         B=255;
     }
     SYS_RGB.set_RGB(R>>3, G>>3, B>>3, 0);
+    
 }
 
 void duty_to_PWM(float duty)
